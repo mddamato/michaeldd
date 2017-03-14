@@ -5,7 +5,7 @@
       url: http://apache.claz.org/nifi/1.1.2/nifi-1.1.2-bin.tar.gz
       dest: /opt/nifi-1.1.2-bin.tar.gz
 
-  - name: Extract archive
+  - name: Extract Nifi archive
     unarchive:
       dest: /usr/share
       src: /opt/nifi-1.1.2-bin.tar.gz
@@ -15,25 +15,14 @@
   - name: Install the Nifi service
     command: /usr/share/nifi-1.1.2/bin/nifi.sh install
 
-  - name: pause
-    pause: seconds=10
-
   - name: Enable and start Nifi
     systemd:
       state: restarted
       daemon_reload: yes
       name: nifi
 
-
-  - name: Wait 20 seconds for Nifi To Start
+  - name: Wait 30 seconds for Nifi To Start
     pause: seconds=30
-
-  # - name: Polling Nifi API
-  #   uri: url=http://{{ ansible_ssh_host }}:8080/nifi-api/system-diagnostics status_code=200
-  #   async: 500
-  #   poll: 5
-  #   register: webpage
-
 
   - name: Waiting for Nifi API to become available
     uri:
