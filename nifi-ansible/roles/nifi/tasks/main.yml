@@ -25,12 +25,16 @@
       name: nifi
 
 
+  - name: Waiting for Nifi API to become available
+    pause: seconds=20
 
-
-
-  - uri: url=http://{{ ansible_ssh_host }}:8080/nifi-api/system-diagnostics status_code=200 timeout=300
+  - name: Polling Nifi API
+    uri: url=http://{{ ansible_ssh_host }}:8080/nifi-api/system-diagnostics status_code=200 timeout=300
+      return_content: yes
     async: 300
-    poll: 10
-    register: amiup
-  - fail
-      when: 'systemDiagnostics' not in "{{ amiup.content }}"
+    poll: 30
+    register: webpage
+
+  - name: Fail if systemDiagnostics is not in the page content
+      fail:
+      when: "'systemDiagnostics' not in webpage.content"
