@@ -24,11 +24,12 @@
       daemon_reload: yes
       name: nifi
 
-- wait_for:
-    sleep: 3
-    uri:
-      url: http://{{ ansible_ssh_host }}:8080/nifi-api/system-diagnostics
-      return_content: yes
-      register: webpage
 
 
+
+
+  - uri: url=http://{{ ansible_ssh_host }}:8080/nifi-api/system-diagnostics status_code=200 timeout=300
+    async: 300
+    poll: 10
+    register: amiup
+  - fail when: 'systemDiagnostics' not in "{{ amiup.content }}"
