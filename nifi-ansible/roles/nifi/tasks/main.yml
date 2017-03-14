@@ -30,9 +30,9 @@
 
   - name: Polling Nifi API
     uri: url=http://{{ ansible_ssh_host }}:8080/nifi-api/system-diagnostics status_code=200
+    async: 500
+    poll: 5
     register: webpage
-    retries: 12
-    delay: 5
 
   - name: Fail if systemDiagnostics is not in the page content
     fail:
