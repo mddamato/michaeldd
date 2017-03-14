@@ -18,7 +18,8 @@
   - name: pause
     pause: seconds=10
 
-  - service:
+  - name: Enable and start Nifi
+    service:
       name: nifi
       enabled: yes
       state: restarted
