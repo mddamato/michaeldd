@@ -15,10 +15,14 @@
   - name: Install the Nifi service
     command: /usr/share/nifi-1.1.2/bin/nifi.sh install
 
+  - name: pause
+    pause: seconds=10
+
   - service:
       name: nifi
+      enabled: yes
       state: started
 
   - name: pause
-    pause: seconds=20
+    pause: seconds=10
 
