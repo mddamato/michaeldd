@@ -32,4 +32,5 @@
     async: 300
     poll: 10
     register: amiup
-  - fail when: 'systemDiagnostics' not in "{{ amiup.content }}"
+  - fail
+      when: 'systemDiagnostics' not in "{{ amiup.content }}"
