@@ -24,6 +24,11 @@
       daemon_reload: yes
       name: nifi
 
-  - name: pause
-    pause: seconds=10
+- wait_for:
+    sleep: 3
+    uri:
+      url: http://{{ ansible_ssh_host }}:8080/nifi-api/system-diagnostics
+      return_content: yes
+      register: webpage
+
 
