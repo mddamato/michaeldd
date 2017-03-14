@@ -1,4 +1,4 @@
- ---
+---
 
 - name: Download Nifi
   get_url:
