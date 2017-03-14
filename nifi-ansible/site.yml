@@ -1,5 +1,5 @@
 ---
-# This playbook deploys a simple standalone Tomcat 7 server.
+# This playbook deploys nifi as a service.
 
 - hosts: nifi-servers
   remote_user: centos
