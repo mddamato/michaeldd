@@ -28,11 +28,21 @@
   - name: Waiting for Nifi API to become available
     pause: seconds=20
 
-  - name: Polling Nifi API
-    uri: url=http://{{ ansible_ssh_host }}:8080/nifi-api/system-diagnostics status_code=200
-    async: 500
-    poll: 5
-    register: webpage
+  # - name: Polling Nifi API
+  #   uri: url=http://{{ ansible_ssh_host }}:8080/nifi-api/system-diagnostics status_code=200
+  #   async: 500
+  #   poll: 5
+  #   register: webpage
+
+
+  - name: "wait for ABC to come up"
+      uri:
+       url: "http://{{ ansible_ssh_host }}:8080/nifi-api/system-diagnostics"
+       status_code: 200
+      register: result
+      until: result.status == 200
+      retries: 60
+      delay: 1
 
   - name: Fail if systemDiagnostics is not in the page content
     fail:
