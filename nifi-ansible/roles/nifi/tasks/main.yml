@@ -19,11 +19,7 @@
     pause: seconds=10
 
   - name: Enable and start Nifi
-    service:
-      use: auto
-      name: nifi
-      enabled: yes
-      state: restarted
+    systemd: state=started name=nifi
 
   - name: pause
     pause: seconds=10
