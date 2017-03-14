@@ -1,0 +1,10 @@
+---
+# This playbook deploys a simple standalone Tomcat 7 server.
+
+- hosts: nifi-servers
+  remote_user: centos
+  become: yes
+  become_method: sudo
+  roles:
+    - common
+    - nifi
