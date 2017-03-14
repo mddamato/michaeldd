@@ -19,7 +19,10 @@
     pause: seconds=10
 
   - name: Enable and start Nifi
-    systemd: state=started name=nifi
+    systemd:
+      state: restarted
+      daemon_reload: yes
+      name: nifi
 
   - name: pause
     pause: seconds=10
