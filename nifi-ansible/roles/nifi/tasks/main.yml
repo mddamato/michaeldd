@@ -20,6 +20,7 @@
 
   - name: Enable and start Nifi
     service:
+      use: auto
       name: nifi
       enabled: yes
       state: restarted
