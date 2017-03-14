@@ -1,21 +1,21 @@
  ---
 
-  - name: Download Nifi
-    get_url:
-      url: http://apache.claz.org/nifi/1.1.2/nifi-1.1.2-bin.tar.gz
-      dest: /opt/nifi-1.1.2-bin.tar.gz
+- name: Download Nifi
+  get_url:
+    url: http://apache.claz.org/nifi/1.1.2/nifi-1.1.2-bin.tar.gz
+    dest: /opt/nifi-1.1.2-bin.tar.gz
 
-  - name: Extract archive
-    unarchive:
-      dest: /usr/share
-      src: /opt/nifi-1.1.2-bin.tar.gz
-      creates: /usr/share/nifi-1.1.2
-      copy: no
+- name: Extract archive
+  unarchive:
+    dest: /usr/share
+    src: /opt/nifi-1.1.2-bin.tar.gz
+    creates: /usr/share/nifi-1.1.2
+    copy: no
 
-  - name: Start the Nifi service
-    command: /usr/share/nifi-1.1.2/bin/nifi.sh start
-  - name: pause
-    pause: seconds=20
+- name: Start the Nifi service
+  command: /usr/share/nifi-1.1.2/bin/nifi.sh start
+- name: pause
+  pause: seconds=20
 
 
 # - name: Install Java 1.7
