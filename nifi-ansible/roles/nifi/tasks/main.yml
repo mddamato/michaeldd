@@ -16,9 +16,8 @@
     command: /usr/share/nifi-1.1.2/bin/nifi.sh install
 
   - name: Enable and start Nifi
-    systemd:
+    service:
       state: restarted
-      daemon_reload: yes
       name: nifi
 
   - name: Wait 30 seconds for Nifi To Start
